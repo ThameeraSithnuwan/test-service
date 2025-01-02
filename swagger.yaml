@@ -1,0 +1,787 @@
+openapi: 3.0.0
+info:
+  title: Combined API Specification
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Root endpoint
+      responses:
+        '200':
+          description: OK
+  /connect/:
+    get:
+      summary: Get agent configuration YAML
+      parameters:
+      - in: header
+        name: x-cluster-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-trace-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-organization-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-project-id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: Agent configuration YAML
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+  /cache/:
+    get:
+      summary: Get cache items
+      parameters:
+      - in: header
+        name: x-cluster-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-project-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-organization-id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: resourceId
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Cache items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /cache/{id}/retry:
+    post:
+      summary: Retry cache item
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-cluster-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-trace-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-project-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-organization-id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: resourceId
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retry result
+        '404':
+          description: Cache entry not found
+        '500':
+          description: Internal server error
+  /cache/retry-all:
+    post:
+      summary: Retry all cache items
+      parameters:
+      - in: header
+        name: x-cluster-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-trace-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-project-id
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: x-organization-id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: Retry result
+        '404':
+          description: Cache entries not found
+        '500':
+          description: Internal server error
+  /cluster:
+    post:
+      summary: Create a new cluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                isGlobal:
+                  type: boolean
+                isOrganizationGlobal:
+                  type: boolean
+                aws:
+                  type: object
+                  properties:
+                    region:
+                      type: string
+                    credentialId:
+                      type: string
+                agent:
+                  type: object
+                  properties:
+                    cpu:
+                      type: string
+                    memory:
+                      type: string
+                    replicas:
+                      type: integer
+                      format: int32
+                type:
+                  type: string
+                metadata:
+                  type: object
+                description:
+                  type: string
+              required:
+              - name
+              - isGlobal
+              - isOrganizationGlobal
+              - aws
+              - agent
+              - type
+      responses:
+        '200':
+          description: Cluster created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cluster:
+                    type: object
+                  applyUrl:
+                    type: string
+                  shouldAgentUpdate:
+                    type: boolean
+                  latestAgentVersion:
+                    type: string
+                  pluginMetadata:
+                    type: array
+                    items:
+                      type: object
+    get:
+      summary: Get all clusters
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /cluster/{id}:
+    put:
+      summary: Update plugin
+      parameters:
+      - name: id
+        in: path
+        description: Cluster ID
+        required: true
+        schema:
+          type: string
+      - name: pluginId
+        in: path
+        description: Plugin ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plugin:
+                    type: object
+    get:
+      summary: Get a cluster
+      parameters:
+      - name: id
+        in: path
+        description: Cluster ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cluster:
+                    type: object
+                  applyUrl:
+                    type: string
+                  shouldAgentUpdate:
+                    type: boolean
+                  latestAgentVersion:
+                    type: string
+                  pluginMetadata:
+                    type: array
+                    items:
+                      type: object
+    delete:
+      summary: Delete plugin
+      parameters:
+      - name: id
+        in: path
+        description: Cluster ID
+        required: true
+        schema:
+          type: string
+      - name: pluginId
+        in: path
+        description: Plugin ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plugin:
+                    type: object
+    post:
+      summary: Create plugin
+      parameters:
+      - name: id
+        in: path
+        description: Cluster ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plugin:
+                    type: object
+    patch:
+      summary: Update agent version or envs
+      parameters:
+      - name: id
+        in: path
+        description: Cluster ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addEnvs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      id:
+                        type: string
+                removeEnvs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      id:
+                        type: string
+                agentVersion:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cluster:
+                    type: object
+                  applyUrl:
+                    type: string
+                  shouldAgentUpdate:
+                    type: boolean
+                  latestAgentVersion:
+                    type: string
+                  pluginMetadata:
+                    type: array
+                    items:
+                      type: object
+  /cluster/soft:
+    delete:
+      summary: Soft delete cluster
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  affected:
+                    type: integer
+                    format: int32
+  /cluster/{id}/update-envs:
+    put:
+      summary: Update envs for a cluster
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addEnvs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                    - name
+                    - id
+                removeEnvs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                    - name
+                    - id
+              required:
+              - addEnvs
+              - removeEnvs
+      responses:
+        '200':
+          description: Envs updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cluster:
+                    type: object
+                  applyUrl:
+                    type: string
+  /cluster/{id}/plugin-metadata:
+    post:
+      summary: Create plugin metadata for a cluster
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Plugin metadata created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plugin:
+                    type: object
+    put:
+      summary: Update plugin metadata for a cluster
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Plugin metadata updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plugin:
+                    type: object
+    delete:
+      summary: Delete plugin metadata for a cluster
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pluginId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Plugin metadata deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plugin:
+                    type: object
+  /healthz:
+    get:
+      summary: Check service health
+      responses:
+        '200':
+          description: Service is healthy
+  /healthz/ping:
+    get:
+      summary: Ping the cluster
+      responses:
+        '200':
+          description: Cluster ping successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+                  error:
+                    type: object
+  /connect:
+    get:
+      summary: Get connect configuration
+      responses:
+        '200':
+          description: Connect configuration
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+  /request/:
+    post:
+      summary: Forward request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                ignoreSSL:
+                  type: boolean
+                body:
+                  type: object
+                headers:
+                  type: object
+                method:
+                  type: string
+              required:
+              - url
+              - method
+      responses:
+        '200':
+          description: Request forwarded successfully
+  /observability/logs:
+    get:
+      summary: Get logs
+      parameters:
+      - in: query
+        name: namespace
+        schema:
+          type: string
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: label
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: container
+        schema:
+          type: string
+      - in: query
+        name: sinceSeconds
+        schema:
+          type: integer
+      - in: query
+        name: previous
+        schema:
+          type: string
+      - in: query
+        name: cloudProviderLogs
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Logs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  data:
+                    type: object
+                  error:
+                    type: object
+                  queryId:
+                    type: string
+                  cloudProvider:
+                    type: string
+  /observability/events:
+    get:
+      summary: Get events
+      parameters:
+      - in: query
+        name: namespace
+        schema:
+          type: string
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: resource
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: string
+      - in: query
+        name: label
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Events retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /observability/prometheus:
+    get:
+      summary: Get Prometheus metrics
+      parameters:
+      - in: query
+        name: query
+        schema:
+          type: string
+      - in: query
+        name: start
+        schema:
+          type: string
+      - in: query
+        name: end
+        schema:
+          type: string
+      - in: query
+        name: step
+        schema:
+          type: string
+      - in: query
+        name: queryType
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Prometheus metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+  /observability/ai-k8s:
+    get:
+      summary: Get k8s gpt
+      parameters:
+      - in: query
+        name: namespace
+        schema:
+          type: string
+      - in: query
+        name: filters
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: k8s gpt retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+  /shell:
+    post:
+      summary: Retry shell execution
+      responses:
+        '200':
+          description: Shell execution retried successfully
+  /resource:
+    post:
+      summary: Redeploy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deploymentName:
+                  type: string
+                namespace:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      summary: Get node list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: Delete app
+      parameters:
+      - name: id
+        in: path
+        description: App ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas: {}
