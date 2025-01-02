@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: shell
+  name: shell-test
+  namespace: skyu-system
+spec:
+  containers:
+  - env:
+    - name: CLUSTER_ID
+      value: cluster_25fb8d07-f999-4bc9-9391-59491c2af4ab
+    - name: SHELL_ID
+      value: cluster_25fb8d07-f999-4bc9-9391-59491c2af4ab
+    - name: SOCKET_URL
+      value:  https://f71e-2405-dc00-ec7d-3cad-b8a3-e952-cb31-9c84.ngrok-free.app 
+    - name: USERNAME
+      value: admin
+    - name: CLUSTER_NAME
+      value: admin
+    image: shell
+    imagePullPolicy: IfNotPresent
+    name: shell
+    resources: {}
+    securityContext:
+      privileged: false
+      runAsNonRoot: true
+      runAsUser: 1000
+  automountServiceAccountToken: true
+  serviceAccountName: nilesh
+  restartPolicy: Never
+  # terminationGracePeriodSeconds: 0
+ 

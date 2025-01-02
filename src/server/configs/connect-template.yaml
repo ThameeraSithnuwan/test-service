@@ -1,0 +1,176 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: skyu-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: skyu-admin
+rules:
+  - apiGroups:
+      - '*'
+    resources:
+      - '*'
+    verbs:
+      - '*'
+  - nonResourceURLs:
+      - '*'
+    verbs:
+      - '*'
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: skyu-sa-${{sanitizedClusterId}}
+  namespace: skyu-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: skyu-agent-config-${{sanitizedClusterId}}
+  namespace: skyu-system
+  labels:
+    project: ${{projectId}}
+    cluster: ${{clusterId}}
+data:
+  config.json: ${{agentSecretConfig}}
+  apiToken: ${{apiToken}}
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: skyu-${{sanitizedClusterId}}
+  labels:
+    project: ${{projectId}}
+subjects:
+  - kind: ServiceAccount
+    name: skyu-sa-${{sanitizedClusterId}}
+    namespace: skyu-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: skyu-admin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skyu-agent-${{sanitizedClusterId}}
+  namespace: skyu-system
+  labels:
+    app: skyu-agent-${{sanitizedClusterId}}
+    project: ${{projectId}}
+    cluster: ${{clusterId}}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+  replicas: ${{replicas}}
+  selector:
+    matchLabels:
+      app: skyu-agent-${{sanitizedClusterId}}
+      project: ${{projectId}}
+      cluster: ${{clusterId}}
+  template:
+    metadata:
+      labels:
+        app: skyu-agent-${{sanitizedClusterId}}
+        project: ${{projectId}}
+        cluster: ${{clusterId}}
+    spec:
+      serviceAccount: skyu-sa-${{sanitizedClusterId}}
+      nodeSelector: {}
+      volumes:
+        - name: config-volume
+          secret:
+            secretName: skyu-agent-config-${{sanitizedClusterId}}
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: temp-config
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+      containers:
+        - image: ${{agentImage}}
+          imagePullPolicy: IfNotPresent
+          name: skyu-agent
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            readOnlyRootFilesystem: false
+          resources:
+            requests:
+              memory:  ${{memory}}
+              cpu: ${{cpu}}
+            limits:
+              memory: ${{memory}}
+              cpu: ${{cpu}}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app/config.json
+              subPath: config.json
+            - mountPath: /proc
+              name: proc
+            - mountPath: /.config
+              name: temp-config
+            - mountPath: /.cache
+              name: cache
+          env:
+           - name: VERSION
+             value: ${{agentVersion}}
+           - name: DEPLOYMENT_NAME
+             value: skyu-agent-${{sanitizedClusterId}}
+           - name: CLUSTER_ID
+             value: ${{clusterId}}
+           - name: SERVER_URL
+             value: ${{serverUrl}}
+           - name: SOCKET_URL
+             value: ${{socketUrl}}
+           - name: CLUSTER_TYPE
+             value: ${{clusterType}}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 600
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 600
+            timeoutSeconds: 10
+            failureThreshold: 3
+
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skyu-agent-${{sanitizedClusterId}}
+  namespace: skyu-system
+  labels:
+    app: skyu-agent-${{sanitizedClusterId}}
+    project: ${{projectId}}
+    cluster: ${{clusterId}}
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: skyu-agent-${{sanitizedClusterId}}
+    project: ${{projectId}}
+    cluster: ${{clusterId}}
+

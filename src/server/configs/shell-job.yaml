@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: shell
+    clusterId: ${{clusterId}}
+    projectId: ${{projectId}}
+    shellId: ${{shellId}}
+  name: shell-${{shellId}}
+  namespace: ${{namespace}}
+spec:
+  containers:
+  - env:
+    - name: CLUSTER_ID
+      value: ${{clusterId}}
+    - name: SHELL_ID
+      value: ${{shellId}}
+    - name: SOCKET_URL
+      value: ${{socketUrl}}
+    - name: USERNAME
+      value: ${{username}}
+    - name: CLUSTER_NAME
+      value: ${{clusterName}}
+    image: ${{shellImage}}
+    imagePullPolicy: IfNotPresent
+    name: shell
+    resources: {}
+    securityContext:
+      privileged: false
+      runAsNonRoot: true
+      runAsUser: 1000
+  automountServiceAccountToken: true
+  serviceAccountName: ${{username}}
+  restartPolicy: Never
+ 

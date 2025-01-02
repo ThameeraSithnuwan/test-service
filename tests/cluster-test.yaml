@@ -1,0 +1,157 @@
+config:
+  target: "https://api.dev.skyu.io/cluster-service"
+  timeout: 10
+  phases:
+    - duration: 10
+      arrivalRate: 5
+scenarios:
+  - flow:
+      - post:
+          url: "/resource"
+          headers:
+            x-project-id: "test-project"
+            x-organization-id: "test-organization"
+            x-cluster-id: "cluster_0cdcbfd7-8078-4623-9698-32f3f0981335"
+          json:
+            data:
+              apiVersion: helm.toolkit.fluxcd.io/v2beta1
+              kind: HelmRelease
+              metadata:
+                name: podinfo
+                namespace: default
+              spec:
+                chart:
+                  spec:
+                    chart: podinfo
+                    reconcileStrategy: ChartVersion
+                    version: 6.4.1
+                    sourceRef:
+                      kind: HelmRepository
+                      name: podinfo
+                interval: 5m0s
+                releaseName: podinfo
+                values:
+                  affinity: {}
+                  backend:
+                  backends: []
+                  cache: ''
+                  certificate:
+                    create: false
+                    dnsNames:
+                    - podinfo
+                    issuerRef:
+                      kind: ClusterIssuer
+                      name: self-signed
+                  faults:
+                    delay: false
+                    error: false
+                    testFail: false
+                    testTimeout: false
+                    unhealthy: false
+                    unready: false
+                  h2c:
+                    enabled: false
+                  host:
+                  hpa:
+                    cpu:
+                    enabled: false
+                    maxReplicas: 10
+                    memory:
+                    requests:
+                  image:
+                    pullPolicy: IfNotPresent
+                    repository: ghcr.io/stefanprodan/podinfo
+                    tag: 6.4.1
+                  ingress:
+                    annotations: {}
+                    className: ''
+                    enabled: false
+                    hosts:
+                    - host: podinfo.local
+                      paths:
+                      - path: "/"
+                        pathType: ImplementationSpecific
+                    tls: []
+                  linkerd:
+                    profile:
+                      enabled: false
+                  logLevel: info
+                  nodeSelector: {}
+                  podAnnotations: {}
+                  probes:
+                    liveness:
+                      failureThreshold: 3
+                      initialDelaySeconds: 1
+                      periodSeconds: 10
+                      successThreshold: 1
+                      timeoutSeconds: 5
+                    readiness:
+                      failureThreshold: 3
+                      initialDelaySeconds: 1
+                      periodSeconds: 10
+                      successThreshold: 1
+                      timeoutSeconds: 5
+                    startup:
+                      enable: false
+                      failureThreshold: 20
+                      initialDelaySeconds: 10
+                      periodSeconds: 10
+                      successThreshold: 1
+                      timeoutSeconds: 5
+                  redis:
+                    enabled: false
+                    repository: redis
+                    tag: 7.0.7
+                  replicaCount: 2
+                  resources:
+                    limits:
+                    requests:
+                      cpu: 1m
+                      memory: 16Mi
+                  securityContext: {}
+                  service:
+                    annotations: {}
+                    enabled: true
+                    externalPort: 9898
+                    grpcPort: 9999
+                    grpcService: podinfo
+                    hostPort:
+                    httpPort: 9898
+                    metricsPort: 9797
+                    nodePort: 31198
+                    type: ClusterIP
+                  serviceAccount:
+                    enabled: false
+                    imagePullSecrets: []
+                    name:
+                  serviceMonitor:
+                    additionalLabels: {}
+                    enabled: false
+                    interval: 15s
+                  tls:
+                    certPath: "/data/cert"
+                    enabled: false
+                    hostPort:
+                    port: 9899
+                    secretName:
+                  tolerations: []
+                  ui:
+                    color: "#34577c"
+                    logo: ''
+                    message: ''
+      - post:
+          url: "/resource"
+          headers:
+            x-project-id: "test-project-id"
+            x-organization-id: "test-org-id"
+            x-cluster-id: "cluster_a3570c23-754b-471e-883e-4a348d7ce950"
+          json:
+            data:
+              apiVersion: source.toolkit.fluxcd.io/v1beta2
+              kind: HelmRepository
+              metadata:
+                name: podinfo
+                namespace: default
+              spec:
+                interval: 1m0s
+                url: https://stefanprodan.github.io/podinfo

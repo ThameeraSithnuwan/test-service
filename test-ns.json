@@ -1,0 +1,711 @@
+{
+    "code": 0,
+    "data": [
+      {
+        "labels": {
+          "env_id": "710a39ba-d155-4eb3-b612-bac3ba6bd5b8",
+          "env_name": "dev",
+          "kubernetes.io/metadata.name": "asdasdas",
+          "organization_id": "3c16315d-43ed-4cad-9248-37efc6b029fb",
+          "platformer_component": "rudder",
+          "platformer_system": "true",
+          "project_id": "5821ce03-d767-4792-89ac-2ef42f3f7948"
+        },
+        "metrics": [
+          {
+            "namespace": "asdasdas",
+            "timestamp": "2023-12-03T04:46:57Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "release-grafana-88db6d699-4j7v7",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0,
+            "usage_cpu": 0.003,
+            "usage_memory": 78
+          }
+        ],
+        "name": "asdasdas"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "big-monolith"
+        },
+        "metrics": [],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"name\":\"big-monolith\"}}\n"
+        },
+        "name": "big-monolith"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "default"
+        },
+        "metrics": [
+          {
+            "namespace": "default",
+            "timestamp": "2023-12-03T04:46:56Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "podinfo-5557bddbf8-gm64h",
+            "status": "Running",
+            "restarts": "3",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.001,
+            "requests_mem": 16,
+            "usage_cpu": 0.007,
+            "usage_memory": 19
+          },
+          {
+            "namespace": "default",
+            "timestamp": "2023-12-03T04:46:56Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "podinfo-5557bddbf8-w7tgf",
+            "status": "Running",
+            "restarts": "3",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.001,
+            "requests_mem": 16,
+            "usage_cpu": 0.007,
+            "usage_memory": 16
+          }
+        ],
+        "name": "default"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "falco"
+        },
+        "metrics": [],
+        "name": "falco"
+      },
+      {
+        "labels": {
+          "app.kubernetes.io/instance": "flux-system",
+          "app.kubernetes.io/part-of": "flux",
+          "app.kubernetes.io/version": "v2.1.0",
+          "kubernetes.io/metadata.name": "flux-system",
+          "pod-security.kubernetes.io/warn": "restricted",
+          "pod-security.kubernetes.io/warn-version": "latest"
+        },
+        "metrics": [
+          {
+            "namespace": "flux-system",
+            "timestamp": "2023-12-06T06:22:31Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "helm-controller-5b89858f68-qqchk",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": null,
+            "limits_mem": 1024,
+            "requests_cpu": 0.1,
+            "requests_mem": 64,
+            "usage_cpu": 0.002,
+            "usage_memory": 37
+          },
+          {
+            "namespace": "flux-system",
+            "timestamp": "2023-12-06T06:22:31Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "source-controller-9cf544975-8lbdm",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": null,
+            "limits_mem": 1024,
+            "requests_cpu": 0.05,
+            "requests_mem": 64,
+            "usage_cpu": 0.003,
+            "usage_memory": 56
+          }
+        ],
+        "name": "flux-system"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "kube-node-lease"
+        },
+        "metrics": [],
+        "name": "kube-node-lease"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "kube-public"
+        },
+        "metrics": [],
+        "name": "kube-public"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "kube-system"
+        },
+        "metrics": [
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:59Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "coredns-5d78c9869d-ld7nl",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 170,
+            "requests_cpu": 0.1,
+            "requests_mem": 70,
+            "usage_cpu": 0.005,
+            "usage_memory": 22
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:59Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "coredns-5d78c9869d-ptrsn",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 170,
+            "requests_cpu": 0.1,
+            "requests_mem": 70,
+            "usage_cpu": 0.004,
+            "usage_memory": 19
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:58Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "etcd-docker-desktop",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.1,
+            "requests_mem": 100,
+            "usage_cpu": 0.045,
+            "usage_memory": 162
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:54Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kube-apiserver-docker-desktop",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.25,
+            "requests_mem": 0,
+            "usage_cpu": 0.122,
+            "usage_memory": 580
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:56Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kube-controller-manager-docker-desktop",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.2,
+            "requests_mem": 0,
+            "usage_cpu": 0.023,
+            "usage_memory": 87
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:59Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kube-proxy-zpqvd",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0,
+            "usage_cpu": 0.001,
+            "usage_memory": 28
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:39:56Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kube-scheduler-docker-desktop",
+            "status": "Running",
+            "restarts": "52",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.1,
+            "requests_mem": 0,
+            "usage_cpu": 0.005,
+            "usage_memory": 36
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-12-05T04:00:30Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "metrics-server-75f45b4dd4-n5nvg",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.1,
+            "requests_mem": 200,
+            "usage_cpu": 0.007,
+            "usage_memory": 41
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:40:02Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "storage-provisioner",
+            "status": "Running",
+            "restarts": "58",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0,
+            "usage_cpu": 0.003,
+            "usage_memory": 23
+          },
+          {
+            "namespace": "kube-system",
+            "timestamp": "2023-07-16T09:40:02Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "vpnkit-controller",
+            "status": "Running",
+            "restarts": "8",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0,
+            "usage_cpu": 0.001,
+            "usage_memory": 16
+          }
+        ],
+        "name": "kube-system"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "kyverno",
+          "name": "kyverno"
+        },
+        "metrics": [
+          {
+            "namespace": "kyverno",
+            "timestamp": "2023-11-23T06:55:14Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kyverno-admission-controller-7fc5dbcd97-nss6k",
+            "status": "Running",
+            "restarts": "1",
+            "limits_cpu": 0,
+            "limits_mem": 384,
+            "requests_cpu": 0.1,
+            "requests_mem": 128,
+            "usage_cpu": 0.003,
+            "usage_memory": 59
+          },
+          {
+            "namespace": "kyverno",
+            "timestamp": "2023-11-23T06:55:14Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kyverno-background-controller-69ff94fcb5-4vzdp",
+            "status": "Running",
+            "restarts": "1",
+            "limits_cpu": 0,
+            "limits_mem": 128,
+            "requests_cpu": 0.1,
+            "requests_mem": 64,
+            "usage_cpu": 0.002,
+            "usage_memory": 43
+          },
+          {
+            "namespace": "kyverno",
+            "timestamp": "2023-12-06T09:50:00Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kyverno-cleanup-admission-reports-28364270-2ml6p",
+            "status": "Succeeded",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0
+          },
+          {
+            "namespace": "kyverno",
+            "timestamp": "2023-12-06T09:50:00Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kyverno-cleanup-cluster-admission-reports-28364270-gw67j",
+            "status": "Succeeded",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0
+          },
+          {
+            "namespace": "kyverno",
+            "timestamp": "2023-11-23T06:55:14Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kyverno-cleanup-controller-d8f856896-8bc6n",
+            "status": "Running",
+            "restarts": "5",
+            "limits_cpu": 0,
+            "limits_mem": 128,
+            "requests_cpu": 0.1,
+            "requests_mem": 64,
+            "usage_cpu": 0.004,
+            "usage_memory": 50
+          },
+          {
+            "namespace": "kyverno",
+            "timestamp": "2023-11-23T06:55:14Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "kyverno-reports-controller-d48f4ffb7-7qqdg",
+            "status": "Running",
+            "restarts": "5",
+            "limits_cpu": 0,
+            "limits_mem": 128,
+            "requests_cpu": 0.1,
+            "requests_mem": 64,
+            "usage_cpu": 0.003,
+            "usage_memory": 59
+          }
+        ],
+        "name": "kyverno"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "platformer-system"
+        },
+        "metrics": [],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"name\":\"platformer-system\"}}\n"
+        },
+        "name": "platformer-system"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "secure-middleware"
+        },
+        "metrics": [],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"name\":\"secure-middleware\"}}\n"
+        },
+        "name": "secure-middleware"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "skyu-system"
+        },
+        "metrics": [
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-05T05:17:11Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-101b21f0-03db-4d12-9fc8-ea21d384dde4-6fdqx6v",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 500,
+            "requests_cpu": 0.4,
+            "requests_mem": 500,
+            "usage_cpu": 0.002,
+            "usage_memory": 293
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-05T05:17:11Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-101b21f0-03db-4d12-9fc8-ea21d384dde4-6fqjhzw",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 500,
+            "requests_cpu": 0.4,
+            "requests_mem": 500,
+            "usage_cpu": 0.001,
+            "usage_memory": 295
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-05T04:44:22Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-6a095836-b787-4fbf-8056-1b0669711acb-d72hhkx",
+            "status": "Running",
+            "restarts": "1",
+            "limits_cpu": 0.242,
+            "limits_mem": 500,
+            "requests_cpu": 0.242,
+            "requests_mem": 500,
+            "usage_cpu": 0.004,
+            "usage_memory": 308
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-05T04:42:27Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-6a095836-b787-4fbf-8056-1b0669711acb-d7hdjqt",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.242,
+            "limits_mem": 500,
+            "requests_cpu": 0.242,
+            "requests_mem": 500,
+            "usage_cpu": 0.002,
+            "usage_memory": 301
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-05T04:45:26Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-6a095836-b787-4fbf-8056-1b0669711acb-d7s8wpj",
+            "status": "Running",
+            "restarts": "2",
+            "limits_cpu": 0.242,
+            "limits_mem": 500,
+            "requests_cpu": 0.242,
+            "requests_mem": 500,
+            "usage_cpu": 0.002,
+            "usage_memory": 296
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-04T04:51:40Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-92ce6fb6-c4f7-447e-883d-dc52bde61a80-678mhf4",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 800,
+            "requests_cpu": 0.4,
+            "requests_mem": 800,
+            "usage_cpu": 0.002,
+            "usage_memory": 297
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-04T04:51:40Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-92ce6fb6-c4f7-447e-883d-dc52bde61a80-67j7b6d",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 800,
+            "requests_cpu": 0.4,
+            "requests_mem": 800,
+            "usage_cpu": 0.001,
+            "usage_memory": 297
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-04T07:03:12Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-a36975b4-4db4-4e65-b504-fe4e3bcfe95a-f85lz68",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 800,
+            "requests_cpu": 0.4,
+            "requests_mem": 800,
+            "usage_cpu": 0.001,
+            "usage_memory": 294
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-04T07:03:12Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-a36975b4-4db4-4e65-b504-fe4e3bcfe95a-f8m22t9",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 800,
+            "requests_cpu": 0.4,
+            "requests_mem": 800,
+            "usage_cpu": 0.001,
+            "usage_memory": 294
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-04T06:52:45Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-d756c2dc-4ca8-4ab4-ab86-2e3f049abb9a-6d58xl7",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 859,
+            "requests_cpu": 0.4,
+            "requests_mem": 859,
+            "usage_cpu": 0.001,
+            "usage_memory": 330
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-04T06:52:03Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-agent-cluster-d756c2dc-4ca8-4ab4-ab86-2e3f049abb9a-6dzz47j",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0.4,
+            "limits_mem": 859,
+            "requests_cpu": 0.4,
+            "requests_mem": 859,
+            "usage_cpu": 0.001,
+            "usage_memory": 295
+          },
+          {
+            "namespace": "skyu-system",
+            "timestamp": "2023-12-05T05:17:11Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "skyu-config-operator-controller-manager-5697754db5-4znss",
+            "status": "Running",
+            "restarts": "0,0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0,
+            "requests_mem": 0,
+            "usage_cpu": 0.008,
+            "usage_memory": 79
+          }
+        ],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"name\":\"skyu-system\"}}\n"
+        },
+        "name": "skyu-system"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "teleport-cluster",
+          "pod-security.kubernetes.io/enforce": "baseline"
+        },
+        "metrics": [],
+        "name": "teleport-cluster"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "test"
+        },
+        "metrics": [],
+        "name": "test"
+      },
+      {
+        "labels": {
+          "environment-id": "env_cb9ba30a-31af-4cd7-b595-fd07ca4fba34",
+          "environment-name": "dev",
+          "kubernetes.io/metadata.name": "test-1-dev",
+          "organization-id": "org_bf6668ae-7e34-40b4-a1d8-8f3d391114a2",
+          "project-id": "project_262978d9-3aec-4b41-855c-77f08f9b3a42",
+          "project-name": "test-1"
+        },
+        "metrics": [],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"labels\":{\"environment-id\":\"env_cb9ba30a-31af-4cd7-b595-fd07ca4fba34\",\"environment-name\":\"dev\",\"organization-id\":\"org_bf6668ae-7e34-40b4-a1d8-8f3d391114a2\",\"project-id\":\"project_262978d9-3aec-4b41-855c-77f08f9b3a42\",\"project-name\":\"test-1\"},\"name\":\"test-1-dev\"}}\n"
+        },
+        "name": "test-1-dev"
+      },
+      {
+        "labels": {
+          "environment-id": "env_f781cbd4-2453-4873-83d8-8edb5d041d8a",
+          "environment-name": "dev",
+          "kubernetes.io/metadata.name": "test-environment-secret-project-2-dev",
+          "organization-id": "org_1f706723-51b3-4c68-9c82-7637874e79fb",
+          "project-id": "project_da1e1451-0aa8-4ca7-9349-8658c50d5eb3",
+          "project-name": "test-environment-secret-project-2"
+        },
+        "metrics": [],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"labels\":{\"environment-id\":\"env_f781cbd4-2453-4873-83d8-8edb5d041d8a\",\"environment-name\":\"dev\",\"organization-id\":\"org_1f706723-51b3-4c68-9c82-7637874e79fb\",\"project-id\":\"project_da1e1451-0aa8-4ca7-9349-8658c50d5eb3\",\"project-name\":\"test-environment-secret-project-2\"},\"name\":\"test-environment-secret-project-2-dev\"}}\n"
+        },
+        "name": "test-environment-secret-project-2-dev"
+      },
+      {
+        "labels": {
+          "kubernetes.io/metadata.name": "weave"
+        },
+        "metrics": [
+          {
+            "namespace": "weave",
+            "timestamp": "2023-12-02T16:35:26Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "weave-scope-agent-sk46n",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.1,
+            "requests_mem": 100,
+            "usage_cpu": 0.216,
+            "usage_memory": 176
+          },
+          {
+            "namespace": "weave",
+            "timestamp": "2023-12-02T16:35:26Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "weave-scope-app-5659fb9886-brln9",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.2,
+            "requests_mem": 200,
+            "usage_cpu": 0.016,
+            "usage_memory": 190
+          },
+          {
+            "namespace": "weave",
+            "timestamp": "2023-12-02T16:35:26Z",
+            "node": "docker-desktop",
+            "ip": "192.168.65.4",
+            "name": "weave-scope-cluster-agent-5d96c8c477-vtbsv",
+            "status": "Running",
+            "restarts": "0",
+            "limits_cpu": 0,
+            "limits_mem": 0,
+            "requests_cpu": 0.1,
+            "requests_mem": 100,
+            "usage_cpu": 0.036000000000000004,
+            "usage_memory": 105
+          }
+        ],
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"name\":\"weave\"}}\n"
+        },
+        "name": "weave"
+      }
+    ]
+  }

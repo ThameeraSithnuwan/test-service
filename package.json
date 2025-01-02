@@ -1,0 +1,53 @@
+{
+  "name": "kube-bridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-agent": "nodemon --exec ts-node  src/agent/main.ts",
+    "start-server": "nodemon --exec ts-node  src/server/main.ts",
+    "start-shell": "nodemon --exec ts-node  src/shell/main.ts",
+    "start-secret-mock-server": "nodemon --exec ts-node  src/mock-server/secretManager.ts ",
+    "build": "tsc"
+  },
+  "author": "nilesh93.j@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@kubernetes/client-node": "^0.18.1",
+    "@types/express": "^4.17.17",
+    "@types/socket.io": "^3.0.2",
+    "@types/uuid": "^9.0.2",
+    "express": "^4.18.2",
+    "kubernetes": "^1.0.0",
+    "nodemon": "^3.0.1",
+    "socket.io": "^4.7.1",
+    "socket.io-client": "^4.7.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@homebridge/node-pty-prebuilt-multiarch": "^0.11.14",
+    "@socket.io/redis-adapter": "^8.2.1",
+    "@types/semver": "^7.5.6",
+    "axios": "^1.4.0",
+    "axios-retry": "^3.5.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "ioredis": "^5.3.2",
+    "js-yaml": "^4.1.0",
+    "node-pty": "^1.0.0",
+    "node-pty-prebuilt-multiarch": "0.10.1-pre.5",
+    "pg": "^8.11.1",
+    "redis": "^4.6.10",
+    "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.10.4",
+    "routing-controllers-openapi": "^4.0.0",
+    "semver": "^7.5.4",
+    "typeorm": "0.3.20",
+    "uuid": "^9.0.0",
+    "winston": "^3.10.0",
+    "xterm": "^5.3.0"
+  }
+}

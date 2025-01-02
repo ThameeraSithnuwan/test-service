@@ -1,0 +1,16 @@
+apiVersion: rbacmanager.reactiveops.io/v1beta1
+kind: RBACDefinition
+metadata:
+  name: nilesh-rbac
+  namespace: skyu-system
+rbacBindings:
+  - name: nilesh
+    subjects:
+      - kind: ServiceAccount
+        name: nilesh
+        namespace: skyu-system
+    clusterRoleBindings:
+      - clusterRole: view
+    roleBindings:
+      - clusterRole: admin
+        namespace: default

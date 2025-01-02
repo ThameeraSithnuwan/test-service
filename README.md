@@ -1,0 +1,1 @@
+kubectl get namespace flux-system -o json  | sed 's/\"kubernetes\"//'  | kubectl replace --raw /api/v1/namespaces/flux-system/finalize -f -

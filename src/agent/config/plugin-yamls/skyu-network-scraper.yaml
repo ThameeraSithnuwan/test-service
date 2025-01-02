@@ -1,0 +1,266 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: skyu-network-scraper
+  namespace: skyu-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: skyu-network-scraper
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: skyu-network-scraper
+subjects:
+  - kind: ServiceAccount
+    name: skyu-network-scraper
+    namespace: skyu-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: skyu-network-scraper
+rules:
+  - apiGroups:
+    - policy
+    - extensions
+    resourceNames:
+    - skyu-network-scraper
+    resources:
+    - podsecuritypolicies
+    verbs:
+    - use
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - endpoints
+      - persistentvolumeclaims
+      - persistentvolumeclaims/status
+      - pods
+      - replicationcontrollers
+      - replicationcontrollers/scale
+      - serviceaccounts
+      - services
+      - services/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - bindings
+      - events
+      - limitranges
+      - namespaces/status
+      - pods/log
+      - pods/status
+      - nodes
+      - replicationcontrollers/status
+      - resourcequotas
+      - resourcequotas/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - namespaces
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - apps
+    resources:
+      - controllerrevisions
+      - daemonsets
+      - daemonsets/status
+      - deployments
+      - deployments/scale
+      - deployments/status
+      - replicasets
+      - replicasets/scale
+      - replicasets/status
+      - statefulsets
+      - statefulsets/scale
+      - statefulsets/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - cronjobs/status
+      - jobs
+      - jobs/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - daemonsets/status
+      - deployments
+      - deployments/scale
+      - deployments/status
+      - ingresses
+      - ingresses/status
+      - networkpolicies
+      - replicasets
+      - replicasets/scale
+      - replicasets/status
+      - replicationcontrollers/scale
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+      - poddisruptionbudgets/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingresses/status
+      - networkpolicies
+  - verbs:
+      - get
+    apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+  - verbs:
+      - list
+    apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+  - verbs:
+      - watch
+    apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - metrics.k8s.io
+    resources:
+      - pods
+      - nodes
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: skyu-network-scraper
+  namespace: skyu-system
+  labels:
+    app: skyu-network-scraper
+    app.kubernetes.io/name: skyu-network-scraper
+    app.kubernetes.io/instance: skyu-network-scraper
+spec:
+  selector:
+    matchLabels:
+      app: skyu-network-scraper
+      app.kubernetes.io/name: skyu-network-scraper
+      app.kubernetes.io/instance: skyu-network-scraper
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: skyu-network-scraper
+        app.kubernetes.io/name: skyu-network-scraper
+        app.kubernetes.io/instance: skyu-network-scraper
+    spec:
+      serviceAccountName: skyu-network-scraper
+      securityContext:
+        {}
+      containers:
+        - name: skyu-network-scraper
+          securityContext:
+            privileged: true
+            readOnlyRootFilesystem: true
+          image: "quay.io/groundcover/caretta:v0.0.16"
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /proc
+              name: proc
+            - mountPath: /sys/kernel/debug
+              name: debug
+          ports:
+            - name: prom-metrics
+              containerPort: 7117
+              protocol: TCP
+          env:
+            - name: "RESOLVE_DNS"
+              value: "true"
+            - name: "PROMETHEUS_PORT"
+              value: "7117"
+            - name: "PROMETHEUS_ENDPOINT"
+              value: "/metrics"
+            - name: "POLL_INTERVAL"
+              value: "5"
+          resources:
+            limits:
+              cpu: 150m
+              memory: 300Mi
+            requests:
+              cpu: 10m
+              memory: 50Mi
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+          operator: Exists
+      volumes:
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: debug
+          hostPath:
+            path: /sys/kernel/debug
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: skyu-network-scraper-monitor
+  namespace: skyu-system
+spec:
+  selector:
+    matchLabels:
+      app: skyu-network-scraper
+      app.kubernetes.io/name: skyu-network-scraper
+      app.kubernetes.io/instance: skyu-network-scraper
+  podMetricsEndpoints:
+  - port: prom-metrics
+    path: /metrics
+    interval: 5s
+    honorLabels: true
+    scheme: http
+  jobLabel: app.kubernetes.io/name
+  namespaceSelector:
+    matchNames:
+    - skyu-system

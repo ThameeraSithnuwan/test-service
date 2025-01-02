@@ -1,0 +1,23 @@
+{
+    "redisOptions": {
+        "host": "localhost",
+        "port": 6379,
+        "password": "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81",
+        "lazyConnect": true
+    },
+    "socketUrl": "http://localhost:3001",
+    "serverUrl": "http://localhost:3000",
+    "agentRegistryUrl": "skyu-cluster-agent",
+    "secretServiceUrl": "http://localhost:8080",
+    "credentialServiceUrl": "http://localhost:3000",
+    "authServiceUrl": "http://localhost:4000",
+    "notificationServiceUrl": "http://localhost:5000",
+    "postgres": {
+        "host": "localhost",
+        "port": 5432,
+        "database": "bridge",
+        "username": "user",
+        "password": "pass"
+    },
+    "aiKey": ""
+}
